@@ -1,3 +1,3 @@
-__all__ = ["rewrite_condition"]
+__all__ = ["ErrorDetector"]
 
-from felligiholt.rewrite_linear import rewrite_condition
+from fellegiholt.errordetector import ErrorDetector
