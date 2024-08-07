@@ -1,0 +1,26 @@
+To encode constraints:
+
+NOT -> Flip sign and add SMALL
+AND -> Split in 2 constraints
+OR -> Create dummy. Then add `DUMMY*BIG` to left constraint and `(1-DUMMY)*BIG` to right constraint.
+
+This should be done recursively
+
+So starting from the following problem:
+```
+married >> (age >= 16)
+```
+
+This is translated to:
+
+```
+(~married) | (age >= 16)
+```
+
+which should be encoded as something like:
+```
+eligible_for_marriage_0: - DUMMY + married <= 1 - SMALL
+eligible_for_marriage_1: - BIG * DUMMY + age >= BIG - 16
+```
+
+The hard part is finding good values for BIG and SMALL (or make them depend on the data itself)
